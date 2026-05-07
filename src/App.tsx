@@ -45,7 +45,11 @@ function App() {
       <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col h-screen">
 
         <header className="py-6 px-4 border-b border-neutral-100 flex justify-between items-center">
-          <h1 className="text-lg font-medium tracking-tight">Flashcards</h1>
+          <div className='flex items-center gap-2'>
+            <h1 className="text-lg font-semibold">Flashcards</h1>
+            <svg className="w-5 h-5 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
+          </div>
+
           {studyTema && (
             <span className="text-xs bg-neutral-100 text-neutral-600 px-3 py-1 rounded-full">
               {studyTema}
