@@ -5,6 +5,7 @@ function App() {
   const [messages, setMessages] = useState<{ role: 'user' | 'bot', text: string }[]>([]);
   const [input, setInput] = useState('');
   const [studyText, setStudyText] = useState('');
+  const [studyTema, setStudyTema] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,11 +25,19 @@ function App() {
 
     const IAresponse = await IAGenerator(currentStudyText, updatedMessages);
 
+    setStudyTema(IAresponse.tema);
+
+    console.log(IAresponse);
+
     const botText = IAresponse.feedback
       ? `${IAresponse.feedback}\n\n${IAresponse.pregunta}`
       : IAresponse.pregunta;
 
     setMessages(prev => [...prev, { role: 'bot', text: botText }]);
+
+    if (IAresponse.terminado) {
+      setStudyText('');
+    }
   }
 
   return (
@@ -37,6 +46,11 @@ function App() {
 
         <header className="py-6 px-4 border-b border-neutral-100 flex justify-between items-center">
           <h1 className="text-lg font-medium tracking-tight">Flashcards</h1>
+          {studyTema && (
+            <span className="text-xs bg-neutral-100 text-neutral-600 px-3 py-1 rounded-full">
+              {studyTema}
+            </span>
+          )}
           {studyText && (
             <span className="text-xs bg-neutral-100 text-neutral-600 px-3 py-1 rounded-full">
               Tema memorizado
@@ -68,8 +82,8 @@ function App() {
                       {isUser ? 'Tú' : 'Tutor'}
                     </span>
                     <div className={`px-4 py-3 leading-relaxed text-[15px] whitespace-pre-wrap shadow-sm border ${isUser
-                        ? 'bg-neutral-800 text-white rounded-2xl rounded-br-sm border-neutral-800'
-                        : 'bg-white text-neutral-800 rounded-2xl rounded-bl-sm border-neutral-200'
+                      ? 'bg-neutral-800 text-white rounded-2xl rounded-br-sm border-neutral-800'
+                      : 'bg-white text-neutral-800 rounded-2xl rounded-bl-sm border-neutral-200'
                       }`}>
                       {msg.text}
                     </div>
@@ -92,6 +106,7 @@ function App() {
             <input
               type="text"
               value={input}
+              maxLength={600}
               onChange={(e) => setInput(e.target.value)}
               placeholder={studyText ? "Responde a la pregunta..." : "Pega tu texto de estudio aquí..."}
               className="w-full bg-neutral-50 hover:bg-neutral-100 transition-colors text-neutral-900 rounded-full pl-6 pr-24 py-4 focus:outline-none focus:ring-1 focus:ring-neutral-200 border border-transparent focus:border-neutral-200"
