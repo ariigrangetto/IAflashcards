@@ -23,7 +23,6 @@ function App() {
     }
 
     const IAresponse = await IAGenerator(currentStudyText, updatedMessages);
-    console.log(IAresponse);
 
     const botText = IAresponse.feedback
       ? `${IAresponse.feedback}\n\n${IAresponse.pregunta}`
@@ -49,7 +48,7 @@ function App() {
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-neutral-400 gap-4">
               <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
               </div>
               <p className="text-sm">Envía el texto que quieres estudiar para comenzar.</p>
             </div>
@@ -58,35 +57,30 @@ function App() {
               const isUser = msg.role === 'user';
               return (
                 <div key={index} className={`flex gap-3 w-full ${isUser ? 'justify-end' : 'justify-start'}`}>
-                  
-                  {/* Avatar Tutor (Izquierda) */}
+
                   {!isUser && (
                     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 self-end mb-1 bg-neutral-900 text-white shadow-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
                     </div>
                   )}
-
-                  {/* Burbuja de Mensaje */}
                   <div className={`flex flex-col max-w-[75%] ${isUser ? 'items-end' : 'items-start'}`}>
                     <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1 px-1">
                       {isUser ? 'Tú' : 'Tutor'}
                     </span>
-                    <div className={`px-4 py-3 leading-relaxed text-[15px] whitespace-pre-wrap shadow-sm border ${
-                      isUser 
-                        ? 'bg-neutral-800 text-white rounded-2xl rounded-br-sm border-neutral-800' 
+                    <div className={`px-4 py-3 leading-relaxed text-[15px] whitespace-pre-wrap shadow-sm border ${isUser
+                        ? 'bg-neutral-800 text-white rounded-2xl rounded-br-sm border-neutral-800'
                         : 'bg-white text-neutral-800 rounded-2xl rounded-bl-sm border-neutral-200'
-                    }`}>
+                      }`}>
                       {msg.text}
                     </div>
                   </div>
 
-                  {/* Avatar Usuario (Derecha) */}
                   {isUser && (
                     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 self-end mb-1 bg-neutral-100 text-neutral-600 border border-neutral-200 shadow-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                     </div>
                   )}
-                  
+
                 </div>
               );
             })
