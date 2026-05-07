@@ -25,9 +25,7 @@ function App() {
 
     const IAresponse = await IAGenerator(currentStudyText, updatedMessages);
 
-    setStudyTema(IAresponse.tema);
-
-    console.log(IAresponse);
+    setStudyTema(IAresponse.tema)
 
     const botText = IAresponse.feedback
       ? `${IAresponse.feedback}\n\n${IAresponse.pregunta}`

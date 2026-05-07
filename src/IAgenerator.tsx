@@ -45,7 +45,6 @@ export default async function IAGenerator(studyText: string, chatHistory: { role
         });
 
         if (!response.message.content) throw new Error("Error al generar la respuesta");
-        console.log(response);
 
         const parsedResponse = JSON.parse(response.message.content);
         return parsedResponse;
